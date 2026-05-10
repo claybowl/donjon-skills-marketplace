@@ -1,0 +1,26 @@
+{
+  "name": "pieces-mcp",
+  "version": "1.0.0",
+  "description": "Query Pieces Long-Term Memory through MCP",
+  "command": "python",
+  "args": [
+    "${SKILL_DIR}/server.py"
+  ],
+  "env": {
+    "PIECES_MCP_URL": "http://localhost:39300/model_context_protocol/2025-03-26/mcp"
+  },
+  "tools": [
+    {
+      "name": "ask_pieces_ltm",
+      "description": "Query Pieces Long-Term Memory for work history and activity"
+    },
+    {
+      "name": "list_recent_snippets",
+      "description": "List recently saved code snippets"
+    },
+    {
+      "name": "search_snippets",
+      "description": "Search saved code snippets"
+    }
+  ]
+}

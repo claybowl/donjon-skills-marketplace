@@ -1,0 +1,23 @@
+{
+  "skill_name": "vibe-planning",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "hey let's vibe plan — I want to build something that helps musicians find collaborators",
+      "expected_output": "A full conversational interview in surfer persona, followed by a structured Vibe Plan summary with: Big Idea, Core Users, Must-Have Features (3), Nice-to-Have Features, Tech Stack, Success Metrics, Open Questions. Ends with a Vercel deployment suggestion.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "vibe-plan my idea: a better way to track personal finances that doesn't feel like work",
+      "expected_output": "Surfer-voiced interview digging into who the users are, what makes existing finance apps feel like work, what 3 features would make this different. Summary with all required sections. Vercel nudge at end.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "can you interview me about my app? it's kinda like airbnb but for parking spots",
+      "expected_output": "Interview explores: who lists spots vs who books, how payments work, MVP scope vs full marketplace, what's been tried. Forces prioritization down to 3 core features. Delivers clean Vibe Plan doc. Ends with Vercel suggestion.",
+      "files": []
+    }
+  ]
+}

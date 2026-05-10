@@ -1,0 +1,43 @@
+{
+  "eval_id": 0,
+  "eval_name": "organize-agency-folder",
+  "configuration": "without_skill",
+  "expectations": [
+    {
+      "text": "Uses agency-standard taxonomy (clients/, projects/, assets/, docs/, agents/, archive/) in proposed structure",
+      "passed": false,
+      "evidence": "Proposes sales/collateral/ for Jacob PDFs, sales/bridge-funding/ for bridge assets, ARCHIVE/ (not normalized archive/year/). No clients/ folder in proposed structure at all."
+    },
+    {
+      "text": "Explicitly stops at Phase 2 (proposal) and asks for approval before moving any files",
+      "passed": true,
+      "evidence": "Output says 'I won't actually move anything' and frames everything as a proposal — no files moved."
+    },
+    {
+      "text": "Identifies Jacob PDFs/ZIPs as client deliverables and routes them to clients/jacob/deliverables/ (not sales/ or docs/)",
+      "passed": false,
+      "evidence": "Routes Jacob PDFs to 'sales/collateral/' — doesn't create a clients/ folder or client-specific destination."
+    },
+    {
+      "text": "Identifies archive candidates including old reports (kitchen-checks, t-0027, servicepro) and deliverable ZIPs/PDFs",
+      "passed": true,
+      "evidence": "Identifies reports/, kitchen-checks, ARCHIVE/ areas and deliverable ZIPs. Also identifies website/node_modules as space recovery candidate."
+    },
+    {
+      "text": "Groups proposed moves by destination folder (not just a flat list of individual file moves)",
+      "passed": true,
+      "evidence": "Grouped by action type (MOVE, MERGE, RENAME, DELETE) in tables. Also has a 'Quick Wins' section. Destination-grouped in the proposed target structure."
+    },
+    {
+      "text": "Flags ambiguous or unclear items (like duplicate infographics, unknown client assignments) for user decision",
+      "passed": false,
+      "evidence": "Notes some ambiguity inline (e.g. 'are these the same?' for the two bridge decks, 'review' for Private & Shared), but no dedicated flags section. Misses the jacob client assignment question entirely."
+    },
+    {
+      "text": "Proposes consolidating the two existing archive folders (ARCHIVE/ and (ARCHIVE)agent-files/) into one",
+      "passed": true,
+      "evidence": "Action 'RENAME (ARCHIVE)agent-files/ → Move contents into ARCHIVE/agent-files/' is explicitly listed."
+    }
+  ],
+  "pass_rate": 0.571
+}

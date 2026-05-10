@@ -1,0 +1,102 @@
+{
+  "$schema": "https://donjon.agency/schemas/personality-architect/scoring-config-v1.json",
+  "metadata": {
+    "name": "Sample SoulTrace-style Scoring Config",
+    "version": "0.1.0",
+    "tier": 1,
+    "tier_notes": "Tier 1 = weighted sum + poor-person ERS z-scoring. Upgrade to Tier 2 (Bayesian) when N > 1000."
+  },
+  "scale": {
+    "type": "likert_7",
+    "min": 1,
+    "max": 7,
+    "midpoint": 4
+  },
+  "ers": {
+    "method": "user_z_score",
+    "calibration_first_n_items": 5,
+    "notes": "Each user's responses are z-scored against their own mean and stddev before trait scoring. Removes most response-style noise."
+  },
+  "cross_loading_secondary_weight": 0.5,
+  "traits": [
+    "conscientiousness",
+    "need_for_cognition",
+    "analytical_thinking",
+    "agency_motivation",
+    "promotion_focus",
+    "sensation_seeking",
+    "emotional_expressivity",
+    "communion_motivation"
+  ],
+  "archetypes": {
+    "blue": {
+      "name": "Steady Architect",
+      "trait_signature": {
+        "conscientiousness": 0.9,
+        "need_for_cognition": 0.14,
+        "analytical_thinking": 0.46,
+        "agency_motivation": -0.26,
+        "promotion_focus": -0.64,
+        "sensation_seeking": -0.96,
+        "emotional_expressivity": -0.38,
+        "communion_motivation": 0.24
+      }
+    },
+    "green": {
+      "name": "Adaptive Connector",
+      "trait_signature": {
+        "conscientiousness": -0.1,
+        "need_for_cognition": -0.16,
+        "analytical_thinking": -0.24,
+        "agency_motivation": -0.26,
+        "promotion_focus": -0.14,
+        "sensation_seeking": 0.04,
+        "emotional_expressivity": 0.72,
+        "communion_motivation": 0.8400000000000001
+      }
+    },
+    "yellow": {
+      "name": "Energetic Explorer",
+      "trait_signature": {
+        "conscientiousness": -0.9,
+        "need_for_cognition": -0.66,
+        "analytical_thinking": -1.04,
+        "agency_motivation": -0.26,
+        "promotion_focus": 0.86,
+        "sensation_seeking": 1.04,
+        "emotional_expressivity": 0.82,
+        "communion_motivation": 0.54
+      }
+    },
+    "red": {
+      "name": "Intense Driver",
+      "trait_signature": {
+        "conscientiousness": 0.2,
+        "need_for_cognition": -0.16,
+        "analytical_thinking": -0.24,
+        "agency_motivation": 1.04,
+        "promotion_focus": 0.56,
+        "sensation_seeking": 0.34,
+        "emotional_expressivity": 0.12,
+        "communion_motivation": -0.46
+      }
+    },
+    "black": {
+      "name": "Independent Analyst",
+      "trait_signature": {
+        "conscientiousness": -0.1,
+        "need_for_cognition": 0.84,
+        "analytical_thinking": 1.06,
+        "agency_motivation": -0.26,
+        "promotion_focus": -0.64,
+        "sensation_seeking": -0.46,
+        "emotional_expressivity": -1.18,
+        "communion_motivation": -1.06
+      }
+    }
+  },
+  "archetype_grid": {
+    "primary_secondary_format": true,
+    "notes": "25-archetype grid emerges from primary \u00d7 secondary color. The two colors with highest probability form the archetype label, e.g., 'Blue/Black' = Architect with strong analytical bent."
+  }
+}

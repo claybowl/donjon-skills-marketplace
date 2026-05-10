@@ -1,0 +1,106 @@
+# Complete GitHub Actions release workflow for a signed, auto-updating Electron app.
+# Copy to .github/workflows/release.yml in your project.
+#
+# Required GitHub secrets:
+#   MAC_CERTIFICATE                 (base64-encoded Developer ID p12)
+#   MAC_CERTIFICATE_PASSWORD        (password for the p12)
+#   APPLE_ID                        (Apple ID email)
+#   APPLE_APP_SPECIFIC_PASSWORD     (app-specific password from appleid.apple.com)
+#   APPLE_TEAM_ID                   (10-char team ID from Apple Developer portal)
+#
+# Optional (for Windows EV signing via SignPath):
+#   SIGNPATH_ORG_ID
+#   SIGNPATH_PROJECT_SLUG
+#   SIGNPATH_SIGNING_POLICY_SLUG
+#   SIGNPATH_API_TOKEN
+
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:   # allow manual trigger for testing
+
+permissions:
+  contents: write      # needed to create/update GitHub Releases
+
+jobs:
+  release:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, windows-latest]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm build
+
+      # ─── macOS: import Developer ID certificate into a temporary keychain ───
+      - name: Import Mac certificate
+        if: matrix.os == 'macos-latest'
+        env:
+          MAC_CERTIFICATE: ${{ secrets.MAC_CERTIFICATE }}
+          MAC_CERTIFICATE_PASSWORD: ${{ secrets.MAC_CERTIFICATE_PASSWORD }}
+        run: |
+          echo "$MAC_CERTIFICATE" | base64 --decode > certificate.p12
+          security create-keychain -p "$MAC_CERTIFICATE_PASSWORD" build.keychain
+          security default-keychain -s build.keychain
+          security unlock-keychain -p "$MAC_CERTIFICATE_PASSWORD" build.keychain
+          security set-keychain-settings -t 3600 -l build.keychain
+          security import certificate.p12 -k build.keychain \
+            -P "$MAC_CERTIFICATE_PASSWORD" -T /usr/bin/codesign
+          security set-key-partition-list \
+            -S apple-tool:,apple: \
+            -s -k "$MAC_CERTIFICATE_PASSWORD" \
+            build.keychain
+          rm certificate.p12
+
+      # ─── Build, sign, notarize, and publish to GitHub Releases ───
+      - name: Build and publish
+        env:
+          # Public token works for public repos; use a PAT with contents:write for private
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+          # Apple notarization credentials (macOS only; ignored on Windows runner)
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+        run: pnpm exec electron-builder --publish always
+
+      # ─── Windows: sign the installer via SignPath (optional) ───
+      # Remove this block if you're not using SignPath.
+      # See references/windows-signing.md for other paths (self-hosted EV token, etc.).
+      - name: Sign Windows installer with SignPath
+        if: matrix.os == 'windows-latest' && env.SIGNPATH_API_TOKEN != ''
+        uses: signpath/github-action-submit-signing-request@v1
+        env:
+          SIGNPATH_API_TOKEN: ${{ secrets.SIGNPATH_API_TOKEN }}
+        with:
+          api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
+          organization-id: ${{ secrets.SIGNPATH_ORG_ID }}
+          project-slug: ${{ secrets.SIGNPATH_PROJECT_SLUG }}
+          signing-policy-slug: ${{ secrets.SIGNPATH_SIGNING_POLICY_SLUG }}
+          github-artifact-name: windows-installer
+          wait-for-completion: true
+          output-artifact-directory: 'signed-installer'
+
+      - name: Upload signed Windows installer to release
+        if: matrix.os == 'windows-latest' && env.SIGNPATH_API_TOKEN != ''
+        env:
+          SIGNPATH_API_TOKEN: ${{ secrets.SIGNPATH_API_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release upload ${{ github.ref_name }} signed-installer/*.exe --clobber

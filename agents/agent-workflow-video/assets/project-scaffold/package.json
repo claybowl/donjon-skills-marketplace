@@ -1,0 +1,26 @@
+{
+  "name": "agent-workflow-video",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Remotion social cut for an agent workflow narrative.",
+  "scripts": {
+    "dev": "remotion studio",
+    "render": "remotion render DonjonVertical out/video-vertical.mp4",
+    "render:square": "remotion render DonjonSquare out/video-square.mp4",
+    "render:gif": "remotion render DonjonVertical out/video.gif --codec=gif",
+    "still": "remotion still DonjonVertical out/preview.png --frame=45"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.340",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.340"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "typescript": "^5.4.5"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

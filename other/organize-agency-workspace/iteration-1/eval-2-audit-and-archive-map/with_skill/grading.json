@@ -1,0 +1,38 @@
+{
+  "eval_id": 2,
+  "eval_name": "audit-and-archive-map",
+  "configuration": "with_skill",
+  "expectations": [
+    {
+      "text": "Produces a multi-level directory map showing the folder structure with annotations",
+      "passed": true,
+      "evidence": "Full annotated tree output covering 3 levels with per-folder descriptions (e.g. '← Old agent configs (DonDog, Chef setup packages)')"
+    },
+    {
+      "text": "Organizes archive candidates into priority tiers (not just a flat list), explaining the signal/reason for each",
+      "passed": true,
+      "evidence": "Three tiers: Tier 1 (already archived), Tier 2 (strong candidates with reason column), Tier 3 (cleanup/consolidation). Each row has a 'Signal' or 'Detail' column."
+    },
+    {
+      "text": "Handles the case where no files are 90+ days old gracefully (uses content signals instead of just timestamp filtering)",
+      "passed": true,
+      "evidence": "Explicitly states 'The find command returned 0 such files, meaning everything has been touched in the last 90 days — likely due to macOS propagating timestamps on directory access. Instead, archive candidates are identified by content signals.'"
+    },
+    {
+      "text": "Identifies and calls out empty directories (anna/, Donjon_Images/, tasks/, Private & Shared/) as cleanup candidates",
+      "passed": true,
+      "evidence": "Tier 2 archive candidates include 'Private & Shared/ (empty) — delete', 'Donjon_Images/ (empty) — delete', 'summaries/D.D. Heartbeat Orchestrator/ (empty) — delete', 'tasks/ (empty) — delete', 'anna/ (empty) — delete'"
+    },
+    {
+      "text": "Identifies the Jacob-facing PDFs and ZIPs at root as deliverable archive candidates",
+      "passed": true,
+      "evidence": "Tier 2 explicitly lists Donjonatworkfinal.zip ('final' = delivered), donjonatwork-editorsreport.zip, 'Donjon at Work.pdf', 'Donjon at Work copy for Jacob.pdf' ('copy for Jacob' = sent), 'forjacob.pdf' ('for Jacob' = sent)"
+    },
+    {
+      "text": "Generates or includes INDEX.md-style content (structured map with annotations per folder)",
+      "passed": true,
+      "evidence": "Full directory map section with tree + annotations, counts table, and archive recommendations — equivalent to INDEX.md content even if not saved to file (skill phase only asked for audit, not full INDEX write)"
+    }
+  ],
+  "pass_rate": 1.0
+}

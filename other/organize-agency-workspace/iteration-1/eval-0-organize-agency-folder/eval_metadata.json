@@ -1,0 +1,42 @@
+{
+  "eval_id": 0,
+  "eval_name": "organize-agency-folder",
+  "prompt": "Hey, can you organize my agency folder? It's at /Users/clay/Desktop/donjon.agency — it's gotten pretty messy. I want to see what's there, what should be archived, and get it cleaned up.",
+  "assertions": [
+    {
+      "id": "uses-agency-taxonomy",
+      "description": "Uses agency-standard taxonomy (clients/, projects/, assets/, docs/, agents/, archive/) in proposed structure",
+      "type": "qualitative"
+    },
+    {
+      "id": "stops-before-moving",
+      "description": "Explicitly stops at Phase 2 (proposal) and asks for approval before moving any files",
+      "type": "qualitative"
+    },
+    {
+      "id": "identifies-jacob-deliverables",
+      "description": "Identifies Jacob PDFs/ZIPs as client deliverables and routes them to clients/jacob/deliverables/ (not sales/ or docs/)",
+      "type": "qualitative"
+    },
+    {
+      "id": "identifies-archive-candidates",
+      "description": "Identifies archive candidates including old reports (kitchen-checks, t-0027, servicepro) and deliverable ZIPs/PDFs",
+      "type": "qualitative"
+    },
+    {
+      "id": "groups-moves-by-destination",
+      "description": "Groups proposed moves by destination folder (not just a flat list of individual file moves)",
+      "type": "qualitative"
+    },
+    {
+      "id": "flags-ambiguous-items",
+      "description": "Flags ambiguous or unclear items (like duplicate infographics, unknown client assignments) for user decision",
+      "type": "qualitative"
+    },
+    {
+      "id": "consolidates-archive-folders",
+      "description": "Proposes consolidating the two existing archive folders (ARCHIVE/ and (ARCHIVE)agent-files/) into one",
+      "type": "qualitative"
+    }
+  ]
+}

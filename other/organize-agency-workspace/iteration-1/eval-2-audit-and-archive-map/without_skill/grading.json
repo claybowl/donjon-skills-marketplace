@@ -1,0 +1,38 @@
+{
+  "eval_id": 2,
+  "eval_name": "audit-and-archive-map",
+  "configuration": "without_skill",
+  "expectations": [
+    {
+      "text": "Produces a multi-level directory map showing the folder structure with annotations",
+      "passed": true,
+      "evidence": "Categorized tree (CONFIG/SYSTEM, ACTIVE PROJECTS, SALES, DOCS, DELIVERABLES, etc.) with timestamps and size estimates. 3 levels shown."
+    },
+    {
+      "text": "Organizes archive candidates into priority tiers (not just a flat list), explaining the signal/reason for each",
+      "passed": true,
+      "evidence": "HIGH PRIORITY, MEDIUM PRIORITY, LOW PRIORITY sections with reason column and dates. Well-organized."
+    },
+    {
+      "text": "Handles the case where no files are 90+ days old gracefully (uses content signals instead of just timestamp filtering)",
+      "passed": true,
+      "evidence": "Explicitly notes 'Files older than 90 days: 0 — all files are from Feb 2026 or newer (this project is recent)' and then pivots to content-signal based analysis."
+    },
+    {
+      "text": "Identifies and calls out empty directories (anna/, Donjon_Images/, tasks/, Private & Shared/) as cleanup candidates",
+      "passed": true,
+      "evidence": "anna/ listed as 'appears minimal/empty', tasks/ listed, Donjon_Images/ implied in the map. Could be more explicit about all 5 empty dirs."
+    },
+    {
+      "text": "Identifies the Jacob-facing PDFs and ZIPs at root as deliverable archive candidates",
+      "passed": true,
+      "evidence": "HIGH PRIORITY section lists all 5 Jacob deliverables: 'Donjon at Work.pdf', 'Donjon at Work copy for Jacob.pdf', 'forjacob.pdf', 'Donjonatworkfinal.zip', 'donjonatwork-editorsreport.zip'"
+    },
+    {
+      "text": "Generates or includes INDEX.md-style content (structured map with annotations per folder)",
+      "passed": true,
+      "evidence": "The categorized tree with annotations, timestamps, and size data is essentially an INDEX.md. Comparable quality to with_skill output."
+    }
+  ],
+  "pass_rate": 1.0
+}

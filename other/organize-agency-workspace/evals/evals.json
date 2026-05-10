@@ -1,0 +1,23 @@
+{
+  "skill_name": "organize-agency",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "Hey, can you organize my agency folder? It's at /Users/clay/Desktop/donjon.agency — it's gotten pretty messy. I want to see what's there, what should be archived, and get it cleaned up.",
+      "expected_output": "Audit summary of the directory, proposed before→after move list grouped by destination folder, waits for approval before moving anything. Should identify loose root-level files, archive candidates (90+ day old or deliverable-looking files), and propose the agency-standard folder structure.",
+      "files": []
+    },
+    {
+      "id": 1,
+      "prompt": "I've got a bunch of files in /tmp/test-agency-mess that I need cleaned up. Can you also run graphify on it when you're done reorganizing?",
+      "expected_output": "Runs audit on the specified directory, proposes structure, waits for approval, executes moves, generates INDEX.md, then checks for graphify and either runs it or tells user how to install it.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "What's in my donjon.agency folder? Can you map it out and tell me what's old enough to archive?",
+      "expected_output": "Produces a clear file inventory/map of donjon.agency, identifies files not modified in 90+ days and deliverable-looking files (PDFs, ZIPs, etc.), presents archival candidates clearly. Should generate or update INDEX.md.",
+      "files": []
+    }
+  ]
+}

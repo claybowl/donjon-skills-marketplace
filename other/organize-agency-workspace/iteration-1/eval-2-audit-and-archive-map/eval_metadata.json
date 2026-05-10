@@ -1,0 +1,37 @@
+{
+  "eval_id": 2,
+  "eval_name": "audit-and-archive-map",
+  "prompt": "What's in my donjon.agency folder? Can you map it out and tell me what's old enough to archive?",
+  "assertions": [
+    {
+      "id": "produces-directory-map",
+      "description": "Produces a multi-level directory map showing the folder structure with annotations",
+      "type": "qualitative"
+    },
+    {
+      "id": "tiered-archive-candidates",
+      "description": "Organizes archive candidates into priority tiers (not just a flat list), explaining the signal/reason for each",
+      "type": "qualitative"
+    },
+    {
+      "id": "handles-no-90day-files",
+      "description": "Handles the case where no files are 90+ days old gracefully (uses content signals instead of just timestamp filtering)",
+      "type": "qualitative"
+    },
+    {
+      "id": "identifies-empty-dirs",
+      "description": "Identifies and calls out empty directories (anna/, Donjon_Images/, tasks/, Private & Shared/) as cleanup candidates",
+      "type": "qualitative"
+    },
+    {
+      "id": "identifies-deliverable-pdfs",
+      "description": "Identifies the Jacob-facing PDFs and ZIPs at root as deliverable archive candidates",
+      "type": "qualitative"
+    },
+    {
+      "id": "generates-index-content",
+      "description": "Generates or includes INDEX.md-style content (structured map with annotations per folder)",
+      "type": "qualitative"
+    }
+  ]
+}

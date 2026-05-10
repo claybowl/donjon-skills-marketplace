@@ -1,0 +1,58 @@
+{
+  "$schema": "https://donjon.agency/schemas/personality-architect/question-bank-v1.json",
+  "metadata": {
+    "name": "Sample SoulTrace-style Personality Test",
+    "version": "0.1.0",
+    "scale": "likert_7",
+    "anchors": {
+      "1": "Strongly Disagree",
+      "4": "Neutral",
+      "7": "Strongly Agree"
+    },
+    "trait_model": [
+      "conscientiousness",
+      "need_for_cognition",
+      "analytical_thinking",
+      "agency_motivation",
+      "promotion_focus",
+      "sensation_seeking",
+      "emotional_expressivity",
+      "communion_motivation"
+    ]
+  },
+  "items": [
+    {"id": "Q-CON-01", "text": "I follow through on plans I make.",                                              "primary_trait": "conscientiousness",       "secondary_trait": null,                  "polarity":  1, "status": "draft"},
+    {"id": "Q-CON-02", "text": "I often abandon tasks before finishing them.",                                   "primary_trait": "conscientiousness",       "secondary_trait": null,                  "polarity": -1, "status": "draft"},
+    {"id": "Q-CON-03", "text": "I keep my workspace tidy.",                                                      "primary_trait": "conscientiousness",       "secondary_trait": null,                  "polarity":  1, "status": "draft"},
+    {"id": "Q-CON-04", "text": "I keep my commitments to others, even when it's inconvenient.",                  "primary_trait": "conscientiousness",       "secondary_trait": "communion_motivation","polarity":  1, "status": "draft"},
+
+    {"id": "Q-NFC-01", "text": "I find satisfaction in puzzling out how things work.",                           "primary_trait": "need_for_cognition",      "secondary_trait": "analytical_thinking", "polarity":  1, "status": "draft"},
+    {"id": "Q-NFC-02", "text": "I'd rather be told the answer than think through a problem myself.",            "primary_trait": "need_for_cognition",      "secondary_trait": null,                  "polarity": -1, "status": "draft"},
+    {"id": "Q-NFC-03", "text": "I enjoy mental challenges that take real effort.",                               "primary_trait": "need_for_cognition",      "secondary_trait": null,                  "polarity":  1, "status": "draft"},
+    {"id": "Q-NFC-04", "text": "I get bored when conversations turn abstract.",                                  "primary_trait": "need_for_cognition",      "secondary_trait": null,                  "polarity": -1, "status": "draft"},
+
+    {"id": "Q-ANA-01", "text": "I'd rather work through a problem methodically than rely on a hunch.",          "primary_trait": "analytical_thinking",     "secondary_trait": "need_for_cognition",  "polarity":  1, "status": "draft"},
+    {"id": "Q-ANA-02", "text": "I trust my gut more than spreadsheets when making decisions.",                   "primary_trait": "analytical_thinking",     "secondary_trait": null,                  "polarity": -1, "status": "draft"},
+    {"id": "Q-ANA-03", "text": "Before deciding, I list out the tradeoffs.",                                     "primary_trait": "analytical_thinking",     "secondary_trait": "conscientiousness",   "polarity":  1, "status": "draft"},
+
+    {"id": "Q-AGE-01", "text": "I want to make a real impact on the world.",                                     "primary_trait": "agency_motivation",       "secondary_trait": "promotion_focus",     "polarity":  1, "status": "draft"},
+    {"id": "Q-AGE-02", "text": "I'm content letting others lead.",                                                "primary_trait": "agency_motivation",       "secondary_trait": null,                  "polarity": -1, "status": "draft"},
+    {"id": "Q-AGE-03", "text": "When I see something broken, I take it on myself to fix it.",                    "primary_trait": "agency_motivation",       "secondary_trait": "conscientiousness",   "polarity":  1, "status": "draft"},
+
+    {"id": "Q-PRO-01", "text": "I focus more on what I want to achieve than on what I want to avoid.",          "primary_trait": "promotion_focus",         "secondary_trait": null,                  "polarity":  1, "status": "draft"},
+    {"id": "Q-PRO-02", "text": "I worry more about losing what I have than gaining what I don't.",              "primary_trait": "promotion_focus",         "secondary_trait": null,                  "polarity": -1, "status": "draft"},
+    {"id": "Q-PRO-03", "text": "I'm drawn to opportunities even when they involve real risk.",                  "primary_trait": "promotion_focus",         "secondary_trait": "sensation_seeking",   "polarity":  1, "status": "draft"},
+
+    {"id": "Q-SEN-01", "text": "I lose interest in tasks once the novelty wears off.",                          "primary_trait": "sensation_seeking",       "secondary_trait": "conscientiousness",   "polarity":  1, "status": "draft"},
+    {"id": "Q-SEN-02", "text": "I prefer routines I can count on.",                                              "primary_trait": "sensation_seeking",       "secondary_trait": null,                  "polarity": -1, "status": "draft"},
+    {"id": "Q-SEN-03", "text": "I'd take a new, risky path over a known, comfortable one.",                     "primary_trait": "sensation_seeking",       "secondary_trait": "promotion_focus",     "polarity":  1, "status": "draft"},
+
+    {"id": "Q-EMO-01", "text": "When I'm happy, the people around me know it.",                                  "primary_trait": "emotional_expressivity",  "secondary_trait": null,                  "polarity":  1, "status": "draft"},
+    {"id": "Q-EMO-02", "text": "I keep my emotions to myself, even with close people.",                          "primary_trait": "emotional_expressivity",  "secondary_trait": null,                  "polarity": -1, "status": "draft"},
+    {"id": "Q-EMO-03", "text": "I cry at movies and don't try to hide it.",                                      "primary_trait": "emotional_expressivity",  "secondary_trait": null,                  "polarity":  1, "status": "draft"},
+
+    {"id": "Q-COM-01", "text": "I'd rather work with others than work alone.",                                   "primary_trait": "communion_motivation",    "secondary_trait": null,                  "polarity":  1, "status": "draft"},
+    {"id": "Q-COM-02", "text": "I'm at my best when I have a tight crew around me.",                             "primary_trait": "communion_motivation",    "secondary_trait": "emotional_expressivity","polarity": 1, "status": "draft"},
+    {"id": "Q-COM-03", "text": "I feel most alive when I'm doing my own thing, away from people.",              "primary_trait": "communion_motivation",    "secondary_trait": null,                  "polarity": -1, "status": "draft"}
+  ]
+}

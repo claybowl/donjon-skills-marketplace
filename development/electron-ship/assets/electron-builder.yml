@@ -1,0 +1,88 @@
+# Complete electron-builder configuration for a signed, auto-updating app.
+# Copy to electron-builder.yml at the root of your project. Customize the
+# marked fields for your specific app.
+
+# ─── IDENTITY (customize these) ─────────────────────────────────────────────
+appId: com.example.yourapp                    # CUSTOMIZE: reverse-DNS, never change later
+productName: Your App                          # CUSTOMIZE: user-facing display name
+copyright: Copyright © 2026 Your Organization  # CUSTOMIZE
+
+# ─── BUILD LAYOUT ───────────────────────────────────────────────────────────
+directories:
+  output: dist                                 # where packaged artifacts go
+  buildResources: build                        # where icons / entitlements live
+
+files:
+  - "out/**/*"                                 # CUSTOMIZE: your build output directory
+  - "package.json"
+  - "!**/node_modules/*/{CHANGELOG.md,README.md,readme.md,*.d.ts}"
+  - "!**/*.{ts,tsx,map}"
+
+asar: true
+# asarUnpack:                                  # uncomment if you use native modules
+#   - "**/node_modules/better-sqlite3/**/*"
+#   - "**/node_modules/keytar/**/*"
+
+# ─── MACOS ──────────────────────────────────────────────────────────────────
+mac:
+  category: public.app-category.productivity   # CUSTOMIZE if not a productivity app
+  hardenedRuntime: true                        # REQUIRED for notarization
+  gatekeeperAssess: false
+  entitlements: build/entitlements.mac.plist
+  entitlementsInherit: build/entitlements.mac.plist
+  notarize: true                               # REQUIRED for notarization
+  icon: build/icon.icns
+  target:
+    - target: dmg
+      arch: [x64, arm64]
+    - target: zip                              # electron-updater needs this
+      arch: [x64, arm64]
+
+dmg:
+  icon: build/icon.icns
+  contents:
+    - x: 130
+      y: 220
+      type: file
+    - x: 410
+      y: 220
+      type: link
+      path: /Applications
+  window:
+    width: 540
+    height: 380
+
+# ─── WINDOWS ────────────────────────────────────────────────────────────────
+win:
+  icon: build/icon.ico
+  target:
+    - target: nsis                             # DO NOT use msi — fights electron-updater
+      arch: [x64]
+  signingHashAlgorithms:
+    - sha256
+  # certificateSubjectName: "Your Organization" # uncomment for self-hosted EV signing
+
+nsis:
+  oneClick: false                              # show installer UI
+  perMachine: false                            # per-user install (no UAC); DO NOT CHANGE mid-lifecycle
+  allowElevation: true
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+
+# ─── LINUX ──────────────────────────────────────────────────────────────────
+linux:
+  icon: build/icon.png
+  category: Development                        # CUSTOMIZE for your app category
+  target:
+    - AppImage
+    - deb
+
+# ─── PUBLISH / AUTO-UPDATE ──────────────────────────────────────────────────
+publish:
+  provider: github
+  owner: your-gh-username                      # CUSTOMIZE
+  repo: your-repo-name                         # CUSTOMIZE
+  releaseType: release                         # 'release' | 'prerelease' | 'draft'
+  private: true                                # set false for public repos
+  vPrefixedTagName: true                       # git tags use v-prefix (v1.0.0)

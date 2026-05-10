@@ -1,0 +1,43 @@
+{
+  "eval_id": 0,
+  "eval_name": "organize-agency-folder",
+  "configuration": "with_skill",
+  "expectations": [
+    {
+      "text": "Uses agency-standard taxonomy (clients/, projects/, assets/, docs/, agents/, archive/) in proposed structure",
+      "passed": true,
+      "evidence": "Output includes clients/jacob/deliverables/, projects/bridge-funding/, projects/ableton/, agents/ (from Agents/), archive/2025/ and archive/2026/ — exact taxonomy match"
+    },
+    {
+      "text": "Explicitly stops at Phase 2 (proposal) and asks for approval before moving any files",
+      "passed": true,
+      "evidence": "Final line: 'Does this look right? I'll wait for your go-ahead before moving anything.' Phase header says 'Awaiting approval before any files are moved.'"
+    },
+    {
+      "text": "Identifies Jacob PDFs/ZIPs as client deliverables and routes them to clients/jacob/deliverables/ (not sales/ or docs/)",
+      "passed": true,
+      "evidence": "Group 1 explicitly routes 'Donjon at Work.pdf', 'Donjon at Work copy for Jacob.pdf', 'forjacob.pdf', 'Donjonatworkfinal.zip', 'donjonatwork-editorsreport.zip' to clients/jacob/deliverables/"
+    },
+    {
+      "text": "Identifies archive candidates including old reports (kitchen-checks, t-0027, servicepro) and deliverable ZIPs/PDFs",
+      "passed": true,
+      "evidence": "Phase 1 archive section lists reports/kitchen-checks/, reports/t-0027/, reports/servicepro/, Chef reports from 2025. Group 11 in Phase 2 archives all dated report folders."
+    },
+    {
+      "text": "Groups proposed moves by destination folder (not just a flat list of individual file moves)",
+      "passed": true,
+      "evidence": "13 move groups, each labeled by destination (e.g. 'Group 1: Root Files → clients/jacob/deliverables/'). Each group has a before/after table."
+    },
+    {
+      "text": "Flags ambiguous or unclear items (like duplicate infographics, unknown client assignments) for user decision",
+      "passed": true,
+      "evidence": "10 explicit 'Items to Flag / Clarify Before Moving' including duplicate infographics, landfill-gas-dashboard client, The Tower variant confusion, etc."
+    },
+    {
+      "text": "Proposes consolidating the two existing archive folders (ARCHIVE/ and (ARCHIVE)agent-files/) into one",
+      "passed": true,
+      "evidence": "Group 10 folds all ARCHIVE/ subfolders into archive/2025/; (ARCHIVE)agent-files/ becomes archive/2025/agent-files/"
+    }
+  ],
+  "pass_rate": 1.0
+}
